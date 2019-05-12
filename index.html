@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+</head>
+
+<body>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <!-- import Vue before Element -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <form id='basicInformation'>
+        <div class="form-wrapper">
+
+            <div class="headerBar">
+                <p>基本信息</p>
+            </div>
+            <div class='box'>
+                <ul id='tablist'>
+                    <li class="tabin">基本信息</li>
+                    <li>家庭信息</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <div class="content contentin">
+                    <main>
+                        <div class="bilateral">
+                            <div class="row">
+                                <label for="">学年</label>
+                                <span>
+                                    <p>2018-2019</p>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">姓名</label>
+                                <span>
+                                    <p>张三</p>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">学号</label>
+                                <span>
+                                    <p>201953565654</p>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">学籍性质</label>
+                                <span>
+                                    <template>
+                                        <el-select v-model="value4" placeholder="请选择">
+                                            <el-option v-for="item in options4" :key="item.value" :label="item.label"
+                                                :value="item.value">
+                                            </el-option>
+                                        </el-select>
+                                    </template>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">国家/地区</label>
+                                <span>
+                                    <template>
+                                        <el-select v-model="value" placeholder="请选择">
+                                            <el-option v-for="item in options" :key="item.value" :label="item.label"
+                                                :value="item.value">
+                                            </el-option>
+                                        </el-select>
+                                    </template>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">性别</label>
+                                <span>
+                                    <template>
+                                        <el-select v-model="value5" placeholder="请选择">
+                                            <el-option v-for="item in options5" :key="item.value" :label="item.label"
+                                                :value="item.value">
+                                            </el-option>
+                                        </el-select>
+                                    </template>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">证件类型</label>
+                                <span>
+                                    <template>
+                                        <el-select v-model="value1" placeholder="请选择">
+                                            <el-option v-for="item in options1" :key="item.value" :label="item.label"
+                                                :value="item.value">
+                                            </el-option>
+                                        </el-select>
+                                    </template>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">证件号码</label>
+                                <span>
+                                    <input type="text" style="width:221px;">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">出生年月</label>
+                                <span>
+                                    <template>
+                                        <div class="block">
+
+                                            <el-date-picker v-model="value3" type="date" placeholder="选择日期" name="birDate">
+                                            </el-date-picker>
+                                        </div>
+
+                                    </template>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">籍贯</label>
+                                <span>
+                                    <p>浙江省 杭州市</p>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">民族</label>
+                                <span>
+                                    <template>
+                                        <el-select v-model="value2" placeholder="请选择">
+                                            <el-option v-for="item in options2" :key="item.value" :label="item.label"
+                                                :value="item.value">
+                                            </el-option>
+                                        </el-select>
+                                    </template>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">政治面貌</label>
+                                <span>
+                                    <template>
+                                        <el-select v-model="value7" placeholder="请选择">
+                                            <el-option v-for="item in options7" :key="item.value" :label="item.label"
+                                                :value="item.value">
+                                            </el-option>
+                                        </el-select>
+                                    </template>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">入学时间</label>
+                                <span>
+                                    <input type="text" style="width:221px;">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">学籍状态</label>
+                                <span>
+                                    <template>
+                                        <el-select v-model="value8" placeholder="请选择">
+                                            <el-option v-for="item in options8" :key="item.value" :label="item.label"
+                                                :value="item.value">
+                                            </el-option>
+                                        </el-select>
+                                    </template>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">血型</label>
+                                <span>
+                                    <template>
+                                        <el-select v-model="value9" placeholder="请选择" name="blod">
+                                            <el-option v-for="item in options9" :key="item.value" :label="item.label"
+                                                :value="item.value" >
+                                            </el-option>
+                                        </el-select>
+                                    </template>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">是否独生子女</label>
+                                <span>
+                                    <template >
+                                        <el-radio v-model="radio" label="1" name='check1'>是</el-radio>
+                                        <el-radio v-model="radio" label="2" name="check2">否</el-radio>
+                                    </template>
+                                </span>
+                            </div>
+                        </div>
+                        <aside>
+                            <img id="u9450_img" class="img " src="https://d2i72ju5buk5xz.cloudfront.net/gsc/9O9YY5/28/97/b9/2897b923939743c9a6e129c723c428ca/images/学生基本信息/u9450.png?token=df1d3b9854a4fd34a59ba7080d417adef6cdc9868065df62883c360006567082">
+                            <div class="pushImg"><span>
+                                    <p>请上传</p>
+                                </span></div>
+                        </aside>
+                    </main>
+
+                    <div class="singleWrapper">
+                        <div class="row">
+                            <label for="">家庭住址</label>
+                            <span class="pos" >
+                                <input type="text" name="address">
+                                <span class="error" style=""></span>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <label for="">身心情况说明</label>
+                            <span class="pos">
+                                <input type="text" name="phy">
+                                <span class="error" style=""></span>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <label for="">饮食习惯</label>
+                            <span class="pos">
+                                <input type="text" name="diet">
+                                <span class="error" style=""></span>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <label for="">兴趣爱好</label>
+                            <span class="pos">
+                                <input type="text" name="interest">
+                                <span class="error" style=""></span>
+                            </span>
+                        </div>
+                    </div>
+                    <footer>
+                        <button type="submit">提交</button>
+                        <button>关闭</button>
+
+                    </footer>
+                </div>
+
+
+
+                <div class="content">
+                    <form id="fam-form">
+                        <div class="fam-wrapper">
+                            <div class="row">
+                                <label for="">父亲姓名</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">父亲电话</label>
+                                <span>
+                                    <input type="text" name='dadPhone'>
+                                    <span class="error" style=""></span>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">父亲学历</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">父亲职业</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">父亲单位</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">父亲职务</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">母亲姓名</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">母亲电话</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">母亲学历</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">母亲职业</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">母亲单位</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">母亲职务</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">监护人姓名</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">监护人电话</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">监护人学历</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">监护人职务</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">监护人单位</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label for="">监护人职务</label>
+                                <span>
+                                    <input type="text">
+                                </span>
+                            </div>
+                            <footer>
+                                <button type="submit" >提交</button>
+                                <button>关闭</button>
+                            </footer>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+    <script src="./main.js"></script>
+    <script>
+        let hash = {}
+        
+        $('#basicInformation').on('submit',(e)=>{
+            e.preventDefault()
+            console.log(e)
+            hash['check1']=$('#basicInformation').find('input[name="check1"]:checked').val()
+            hash['check2']=$('#basicInformation').find('input[name="check2"]:checked').val()
+            let need=['address','phy','diet','interest','blod','birDate','dadPhone']
+            need.forEach((name)=>{
+                console.log(name)
+                let value=$('#basicInformation').find(`[name=${name}]`).val()
+                hash[name]=value
+            })
+            console.log(hash)
+            $('#basicInformation').find('.error').each((index,span) =>{
+               $(span).text('') 
+            })
+            if(hash['address'] === ''){
+                $('#basicInformation').find('[name="address"]').siblings('.error').text('内容不能为空')
+                return
+            }
+            if(hash['phy'] === ''){
+                $('#basicInformation').find('[name="phy"]').siblings('.error').text('内容不能为空')
+                return
+            }
+            if(hash['diet'] === ''){
+                $('#basicInformation').find('[name="diet"]').siblings('.error').text('内容不能为空')
+                return
+            }
+            if(hash['interest'] === ''){
+                $('#basicInformation').find('[name="interest"]').siblings('.error').text('内容不能为空')
+                return
+            }
+            if(!(/^1(3|4|5|7|8)\d{9}$/.test(hash['dadPhone']))){
+                $('#basicInformation').find('[name="dadPhone"]').siblings('.error').text('请填写正确号码')
+                return false
+            }
+           
+        })
+    </script>
+</body>
+
+</html>
