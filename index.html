@@ -364,45 +364,84 @@
     </form>
     <script src="./main.js"></script>
     <script>
-        let hash = {}
-        
-        $('#basicInformation').on('submit',(e)=>{
-            e.preventDefault()
-            console.log(e)
-            hash['check1']=$('#basicInformation').find('input[name="check1"]:checked').val()
-            hash['check2']=$('#basicInformation').find('input[name="check2"]:checked').val()
-            let need=['address','phy','diet','interest','blod','birDate','dadPhone']
-            need.forEach((name)=>{
-                console.log(name)
-                let value=$('#basicInformation').find(`[name=${name}]`).val()
-                hash[name]=value
+        (function () {
+            let hash = {}
+            
+            $('#basicInformation').on('submit',(e)=>{
+                e.preventDefault()
+                hash['check1']=$('#basicInformation').find('input[name="check1"]:checked').val()
+                hash['check2']=$('#basicInformation').find('input[name="check2"]:checked').val()
+                let need=['address','phy','diet','interest','blod','birDate','dadPhone']
+                need.forEach((name)=>{
+                    console.log(name)
+                    value=$('#basicInformation').find(`[name=${name}]`).val()
+                    hash[name]=value
+                })
+                console.log(hash)
+                var map = {
+                    address: { required: true, message: '地址不能为空' },
+                    phy: { required: true, message: '内容不能为空' },
+                    dadPhone: { required: true, type: 'checkPhone', message: '电话号码不正确' },
+                    diet:{required:true, message:'内容不能为空'},
+                };
+                var flag = true;
+                var keys = Object.keys(hash);
+                $('#basicInformation').find('.error').each((index,span) =>{
+                    $(span).text('') 
+                })
+                var checkMethods = {
+                    checkPhone: function (value, rules, key) {
+                        console.log((/^1(3|4|5|7|8)\d{9}$/.test(value)))
+                        return (/^1(3|4|5|7|8)\d{9}$/.test(value))
+                    }
+                };
+                keys.forEach(function (key) {
+                    let value = hash[key];
+                    var rules = map[key];
+                    if (!rules) return;
+                    // 校验是否必填
+                    if (rules.required) {
+                        if (value === '') {
+                            $('#basicInformation').find('[name='+ key +']').siblings('.error').text(rules.message)
+                            flag = false
+                            return
+                        }
+                    }
+                    // 校验电话号码
+                    if (rules.type && checkMethods[rules.type]) {
+                        var callbck = checkMethods[rules.type];
+                        flag = callbck(value, rules, key);
+                        if(!flag){
+                            $('#basicInformation').find('[name='+ key +']').siblings('.error').text(rules.message)
+                        }
+                       
+                        if (flag) return
+                    }
+                })
+                // console.log(hash)
+                // if(hash['address'] === ''){
+                //     $('#basicInformation').find('[name="address"]').siblings('.error').text('内容不能为空')
+                //     flag = false;
+                // }
+                // if(hash['phy'] === ''){
+                //     $('#basicInformation').find('[name="phy"]').siblings('.error').text('内容不能为空')
+                //     flag = false;
+                // }
+                // if(hash['diet'] === ''){
+                //     $('#basicInformation').find('[name="diet"]').siblings('.error').text('内容不能为空')
+                //     flag = false;
+                // }
+                // if(hash['interest'] === ''){
+                //     $('#basicInformation').find('[name="interest"]').siblings('.error').text('内容不能为空')
+                //     flag = false;
+                // }
+                // if(!(/^1(3|4|5|7|8)\d{9}$/.test(hash['dadPhone']))){
+                //     $('#basicInformation').find('[name="dadPhone"]').siblings('.error').text('请填写正确号码')
+                //     flag = false;
+                // }
+                return flag;
             })
-            console.log(hash)
-            $('#basicInformation').find('.error').each((index,span) =>{
-               $(span).text('') 
-            })
-            if(hash['address'] === ''){
-                $('#basicInformation').find('[name="address"]').siblings('.error').text('内容不能为空')
-                return
-            }
-            if(hash['phy'] === ''){
-                $('#basicInformation').find('[name="phy"]').siblings('.error').text('内容不能为空')
-                return
-            }
-            if(hash['diet'] === ''){
-                $('#basicInformation').find('[name="diet"]').siblings('.error').text('内容不能为空')
-                return
-            }
-            if(hash['interest'] === ''){
-                $('#basicInformation').find('[name="interest"]').siblings('.error').text('内容不能为空')
-                return
-            }
-            if(!(/^1(3|4|5|7|8)\d{9}$/.test(hash['dadPhone']))){
-                $('#basicInformation').find('[name="dadPhone"]').siblings('.error').text('请填写正确号码')
-                return false
-            }
-           
-        })
+        })()
     </script>
 </body>
 
