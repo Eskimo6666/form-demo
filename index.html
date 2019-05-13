@@ -373,10 +373,42 @@
                 hash['check2']=$('#basicInformation').find('input[name="check2"]:checked').val()
                 let need=['address','phy','diet','interest','blod','birDate','dadPhone']
                 need.forEach((name)=>{
-                    console.log(name)
-                    value=$('#basicInformation').find(`[name=${name}]`).val()
+                    //根据表单类型设置value值
+                    var $dom=$('#basicInformation').find(`[name=${name}]`)
+                    $dom.each(function(index,el){
+                        switch(this.tagName){
+                            case 'INPUT':
+                                switch (this.type.toLocaleLowerCase()) {
+                                    case 'checkbox':
+                                        if ($.isArray(value)) {
+                                            $('[name='+ name +']').attr('checked', false);
+                                            $.each(value, function (i, val) {
+                                                $('[name='+ name +'][value='+ val +']').attr('checked', 'checked');
+                                            });
+                                            return false;
+                                        } else {
+                                            $(this).attr('checked', this.value == value)
+                                        }
+                                        break;
+                                    case 'radio':
+                                        $(this).attr('checked', this.value == value)
+                                        break;
+                                    case 'submit':
+                                    case 'button':
+                                    case 'image':
+                                    case 'file':
+                                    case 'cancel':
+                                    case 'reset':
+                                        break;
+                                    default:
+                                        value=$(el).val();
+                                    }
+                        }
+                    })
                     hash[name]=value
+                    console.log(hash)
                 })
+                
                 console.log(hash)
                 var map = {
                     address: { required: true, message: '地址不能为空' },
